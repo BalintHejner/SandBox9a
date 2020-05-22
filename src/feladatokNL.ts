@@ -9,7 +9,9 @@ import { isUndefined } from "util";
 function szamjegy(szam: number): number {
     let osszeg: number = 0;
     for (const i of szam.toString()) {
-        osszeg = osszeg + parseInt(i);
+        if (i !== ".") {
+            osszeg = osszeg + parseInt(i);
+        }
     }
     return osszeg;
 }
