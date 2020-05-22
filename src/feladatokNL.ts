@@ -20,6 +20,9 @@ function szamjegy(szam: number): number {
 // A számot és az osztót paraméterekben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
 
+function osztahtosag(osztando: number, oszto: number): boolean {
+    return osztando % oszto == 0;
+}
 // F3.: Készíts függvényt, ami meghatározza egy szám osztóinak a darabszámát!  A számot paraméterben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
 
@@ -48,6 +51,10 @@ function terulet(r: number): number {
 
 // F7.: Készíts függvényt, ami az "ax +  b = 0" egyenlet gyökét (x) határozza meg! A függvény paraméterei az "a" és "b" értéke legyen!
 // A függvényt teszteljed tetszőleges hívással!
+
+function gyok(a: number, b: number): number {
+    return -b / a;
+}
 
 // F8.: Készíts függvényt két szám legnagyobb közös osztójának (LNKO) meghatározására!
 // A függvény a két számot formális paraméteren keresztül kapja, visszatérési értéke LNKO(a,b)
@@ -150,6 +157,10 @@ export default class Content {
         res.write(`Kör területe(12) = ${terulet(12)}\n`);
 
         res.write(`Számjegyek összege(123456) = ${szamjegy(123.456)}\n`);
+
+        res.write(`Oszthatóság ellenőrzése(123, 456) = ${osztahtosag(123, 456)}\n`);
+
+        res.write(`Gyökvonás(3, 5) = ${gyok(3, 5)}\n`);
 
         // Gy2.: Definiálj egy kör sugarát! Határozd meg a megadott sugarú kör kerületét és területét! (F5.-F6. függvények felhasználásával)
 
