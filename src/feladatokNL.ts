@@ -1,9 +1,18 @@
 import fs from "fs";
 import http from "http";
 import url from "url";
+import { isUndefined } from "util";
 
-// F1.: Készíts függvényt, ami meghatározza (visszatér) egy szám számjegyeinek összegével! A számot paraméterben kapja a függvény!
+// F1.: Készíts függvényt, ami meghatározza (visszatér) egy természetes szám számjegyeinek összegével! A számot paraméterben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
+
+function szamjegy(szam: number): number {
+    let osszeg: number = 0;
+    for (const i of szam.toString()) {
+        osszeg = osszeg + parseInt(i);
+    }
+    return osszeg;
+}
 
 // F2.: Készíts függvényt, ami igaz értékkel tér vissza, ha egy számot maradék nélkül oszt el egy másik szám, hamissal ha nem osztja!
 // A számot és az osztót paraméterekben kapja a függvény!
@@ -18,8 +27,22 @@ import url from "url";
 // F5.: Készíts függvényt, amivel egy sugár paraméterből a kör kerületét tudod meghatározni!
 // Ha az r paraméter r <= 0, vagy r = NaN, vagy r = undefined, akkor NaN értékkel térjen vissza!
 
+function kerulet(r: number): number {
+    if (isNaN(r) || isUndefined(r) || r <= 0) {
+        return NaN;
+    }
+    return 2 * r * Math.PI;
+}
+
 // F6.: Készíts függvényt, amivel egy sugár paraméterből a kör területét tudod meghatározni!
 // Ha az r paraméter r <= 0, vagy r = NaN, vagy r = undefined, akkor NaN értékkel térjen vissza!
+
+function terulet(r: number): number {
+    if (isNaN(r) || isUndefined(r) || r <= 0) {
+        return NaN;
+    }
+    return Math.pow(r, 2) * Math.PI;
+}
 
 // F7.: Készíts függvényt, ami az "ax +  b = 0" egyenlet gyökét (x) határozza meg! A függvény paraméterei az "a" és "b" értéke legyen!
 // A függvényt teszteljed tetszőleges hívással!
@@ -120,6 +143,11 @@ export default class Content {
         for (let i = 0; i < szöveg.length; i++) {
             res.write(`${szöveg[i]}\n`);
         }
+
+        res.write(`Kör kerülete(33) = ${kerulet(33)}\n`);
+        res.write(`Kör területe(12) = ${terulet(12)}\n`);
+
+        res.write(`Számjegyek összege(123456) = ${szamjegy(123.456)}\n`);
 
         // Gy2.: Definiálj egy kör sugarát! Határozd meg a megadott sugarú kör kerületét és területét! (F5.-F6. függvények felhasználásával)
 
