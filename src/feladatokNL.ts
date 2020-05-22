@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import fs from "fs";
 import http from "http";
 import url from "url";
@@ -11,53 +9,25 @@ import url from "url";
 // A számot és az osztót paraméterekben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
 
-function oszt(b: number) {
-    if (b % 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 // F3.: Készíts függvényt, ami meghatározza egy szám osztóinak a darabszámát!  A számot paraméterben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
 
 // F4.: Készíts függvényt, ami igaz értékkel tér vissza, ha a szám prím, hamissal, ha nem prím! A számot paraméterben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
 
-function prim(d: number) {
-    if (d % 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-// F5.: Készíts függvényt, amivel egy sugár paramétrből a kör kerületét tudod meghatározni!
+// F5.: Készíts függvényt, amivel egy sugár paraméterből a kör kerületét tudod meghatározni!
 // Ha az r paraméter r <= 0, vagy r = NaN, vagy r = undefined, akkor NaN értékkel térjen vissza!
 
-function kerulet(K: number, r: number): number {
-    if (r <= 0 || r == NaN || r == undefined) {
-        return (r = NaN);
-    } else {
-        return r;
-    }
-}
-
-// F6.: Készíts függvényt, amivel egy sugár paramétrből a kör területét tudod meghatározni!
+// F6.: Készíts függvényt, amivel egy sugár paraméterből a kör területét tudod meghatározni!
 // Ha az r paraméter r <= 0, vagy r = NaN, vagy r = undefined, akkor NaN értékkel térjen vissza!
 
-function terulet(T: number, r: number) {
-    if (r <= 0 || r == NaN || r == undefined) {
-        return (r = NaN);
-    } else {
-        return r;
-    }
-}
 // F7.: Készíts függvényt, ami az "ax +  b = 0" egyenlet gyökét (x) határozza meg! A függvény paraméterei az "a" és "b" értéke legyen!
 // A függvényt teszteljed tetszőleges hívással!
 
-// F8.: LNKO meghatározása
+// F8.: Készíts függvényt két szám legnagyobb közös osztójának (LNKO) meghatározására!
+// A függvény a két számot formális paraméteren keresztül kapja, visszatérési értéke LNKO(a,b)
+// A függvényt teszteljed tetszőleges hívással!
+
 function LNKO(a: number, b: number): number {
     while (a !== b) {
         if (a > b) {
@@ -69,10 +39,46 @@ function LNKO(a: number, b: number): number {
     return a;
 }
 
-// F9.: LKKT
+// rekurzív megoldás: (a függvény saját magát hívja)
+function LNKOrekurzív(a: number, b: number): number {
+    if (a === 0) return b;
+    if (b === 0) return a;
+    if (a > b) {
+        return LNKOrekurzív(a % b, b);
+    } else {
+        return LNKOrekurzív(a, b % a);
+    }
+}
+
+// F9.: Készíts függvényt két szám legkisebb közös többszörösének (LKKT) meghatározására!
+// A függvény a két számot formális paraméteren keresztül kapja, visszatérési értéke LKKT(a,b)
+// A függvényt teszteljed tetszőleges hívással!
+
 function LKKT(sz1: number, sz2: number): number {
     return (sz1 * sz2) / LNKO(sz1, sz2);
 }
+
+// LKKT hagyományos algoritmus
+// a nagyobb szám olyan többszörösét keressük, melyet eloszt a kisebbik szám
+function LKKThagyomámnyos(a: number, b: number): number {
+    let nagyobbSzám;
+    let kisebbSzám;
+    if (a > b) {
+        nagyobbSzám = a;
+        kisebbSzám = b;
+    } else {
+        nagyobbSzám = b;
+        kisebbSzám = a;
+    }
+    // Melyik nagyobb szám többszörösét osztja maradék nélkül a kisebbik szám
+    let többszörös = nagyobbSzám; // "első" többszörös = nagyobbszám
+    // Melyik nagyobbszám többszörösét osztja a kisebbik szám?
+    while (többszörös % kisebbSzám !== 0) {
+        többszörös += nagyobbSzám; // nagyobb szám többszörösei
+    }
+    return többszörös;
+}
+
 export default class Content {
     public content(req: http.IncomingMessage, res: http.ServerResponse): void {
         // favicon.ico kérés kiszolgálása:
@@ -96,19 +102,20 @@ export default class Content {
 
         // Kezd a kódolást innen -->
 
-        res.write(`<input type='text' name='a' id='a'  style='max-width:300px;' class='form-control' value='${oszt}' onChange='this.form.submit();'>`);
-        res.write(`${oszt}`);
-
-        res.write(`d = ${prim}`);
-
         // Gy1.: Készíts programot ami két szám legkisebb közös többszörösét (LKKT) határozza meg és írja ki!
         // Az algoritmust a neten megtalálod!
         res.write(`LNKO(12,20) = ${LNKO(12, 20)}\n`);
+        res.write(`LNKOrekurzív(12,20) = ${LNKOrekurzív(12, 20)}\n`);
         res.write(`LKKT(7,13) = ${LKKT(7, 13)}\n`);
+        res.write(`LKKThagyományos(7,13) = ${LKKThagyomámnyos(7, 13)}\n`);
 
+        // String bejárása for-of ciklussal:
         for (const i of "alma") {
+            // az "i" itt sztring típusú (nincs char típus JS/TS-ben)
             res.write(`${i}\n`);
         }
+
+        // String bejárása for ciklussal:
         const szöveg: string = "körte";
         for (let i = 0; i < szöveg.length; i++) {
             res.write(`${szöveg[i]}\n`);
@@ -116,14 +123,6 @@ export default class Content {
 
         // Gy2.: Definiálj egy kör sugarát! Határozd meg a megadott sugarú kör kerületét és területét! (F5.-F6. függvények felhasználásával)
 
-        let r: number = parseInt(params.n as string);
-        if (isNaN(r)) {
-            r = 1;
-        }
-        res.write(`<input type='text' name='r' value=${r} style='width:5em;' onChange='this.form.submit();'>\n`);
-
-        res.write(`Kör kerülete: ${kerulet} \n`);
-        res.write(`Kör területe: ${terulet}`);
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
