@@ -26,8 +26,27 @@ function osztahtosag(osztando: number, oszto: number): boolean {
 // F3.: Készíts függvényt, ami meghatározza egy szám osztóinak a darabszámát!  A számot paraméterben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
 
+function osztok(szamok: number): number {
+    let osztoDB: number = 0;
+    for (let oszto = 0; oszto <= szamok; oszto++) {
+        if (szamok % oszto === 0) osztoDB++;
+    }
+    return osztoDB;
+}
+
 // F4.: Készíts függvényt, ami igaz értékkel tér vissza, ha a szám prím, hamissal, ha nem prím! A számot paraméterben kapja a függvény!
 // A függvényt teszteljed tetszőleges hívással!
+
+function prim(primek: number): boolean {
+    if (primek % 1 != 0) {
+        return false;
+    }
+    let osztoDB = 0;
+    for (let oszto = 0; oszto <= primek; oszto++) {
+        if (primek % oszto === 0) osztoDB++;
+    }
+    return osztoDB === 2;
+}
 
 // F5.: Készíts függvényt, amivel egy sugár paraméterből a kör kerületét tudod meghatározni!
 // Ha az r paraméter r <= 0, vagy r = NaN, vagy r = undefined, akkor NaN értékkel térjen vissza!
@@ -162,8 +181,24 @@ export default class Content {
 
         res.write(`Gyökvonás(3, 5) = ${gyok(3, 5)}\n`);
 
+        res.write(`Osztók száma(8) = ${osztok(8)}\n`);
+
+        res.write(`Prímszám(17) = ${prim(17)}\n`);
         // Gy2.: Definiálj egy kör sugarát! Határozd meg a megadott sugarú kör kerületét és területét! (F5.-F6. függvények felhasználásával)
 
+        const sugar: number = 67.45;
+        res.write(`Az r=${sugar} kör területe és kerülete:`);
+        res.write(`Kör kerülete: ${kerulet(sugar)}\n`);
+        res.write(`Kör területe: ${terulet(sugar)}\n`);
+
+        //Gy3.: Írd ki a kétjegyű prímszámokat!
+
+        for (let i = 10; i <= 99; i++) {
+            if (prim(i)) {
+                res.write("Kétjegyű prímszámok \n");
+                res.write(`${i}\n`);
+            }
+        }
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
