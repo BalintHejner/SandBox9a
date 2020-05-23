@@ -4,7 +4,18 @@ import url from "url";
 
 // Feladatok
 // F1.: Írjon függvényt, amely paraméterben kapja egy háromszög 3 oldalát és visszaadja annak kerületét!
+
+function haromszog(a: number, b: number, c: number): number {
+    return a + b + c;
+}
+
 // F2.: Írjon függvényt, amely paraméterben kapja egy háromszög 3 oldalát és visszaadja annak területét! (Ehhez nézzen utána a Héron-képletnek!)
+
+function haromszogter(a: number, b: number, c: number): number {
+    const s: number = 5;
+    return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+}
+
 // F3.: Írjon függvényt, amely paraméterben egy számokat tartalmazó vektort kap és visszaadja a számok átlagát!
 // F4.: Írjon függvényt, amely paraméterben egy számokat tartalmazó vektort kap és logikai értékkel (boolean) tér vissza, amely true ha van a számok között negatív szám és false ha nincs!
 // F5.: Írjon függvényt, amely paraméterben egy sztingeket tartalmazó vektort kap, és kiírja a vektor elemeit egymás alá!
@@ -31,6 +42,10 @@ export default class Content {
         const params = url.parse(req.url as string, true).query;
 
         // Kezd a kódolást innen -->
+
+        res.write(`A háromszög kerülete: ${haromszog(4, 2, 97)} + \n`);
+
+        res.write(`A háromszög területe: ${haromszogter(9, 6, 3)} + \n`);
 
         // <---- Fejezd be a kódolást
 
