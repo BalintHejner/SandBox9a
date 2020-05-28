@@ -53,6 +53,11 @@ function teglalap(a: number, b: number, c: number, d: number): boolean {
     return a / b == c / d;
 }
 
+// F7.: Írjon függvényt, amely paraméterben kap egy sztringet, és egy karaktert, és visszaadja a sztringben lévő karakterek számát!
+// F8.: Írjon függvényt, amely paraméterben kap két számot és visszaadja a két szám mértani közepét!
+// F9.: Írjon függvényt, amely paraméterben kapja egy derékszögű háromszög két befogóját és visszaadja az átfogóját!
+// F10.: Írjon függvényt, amely egy paraméterben kapott számot eloszt 2-vel annyiszor, ahányszor lehet és közben kiírja a számot a kettes számok szorzataként megszorozva egy olyan számmal, amely már nem osztható 2-vel. Pl.: 120 = 2*2*2*15. A függvény ne adjon vissza semmit!
+
 export default class Content {
     public content(req: http.IncomingMessage, res: http.ServerResponse): void {
         // favicon.ico kérés kiszolgálása:
