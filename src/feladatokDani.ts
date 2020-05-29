@@ -6,6 +6,13 @@ import url from "url";
    F1: Készíts egy függvényt amely bekér egy számokból álló tömböt, majd visszaadja a számok
    átlagát!
  */
+function atlag(szamok: number[]): number {
+    let sum: number = 0;
+    for (const i of szamok) {
+        sum = sum + i;
+    }
+    return sum / szamok.length;
+}
 
 /*
   F2: Készíts egy függvényt ami fogad egy String típusú elemekből álló tömböt!
@@ -15,7 +22,14 @@ import url from "url";
 /*
    F3: Készíts egy függvényt ami fogad egy számot, és megmondja (true/false) hogy a szám egy egész számnak a négyzete-e.
        Pl.: 1 -> true; 3 -> false; 4 -> true
- */
+*/
+
+function negyzet(szam: number): boolean {
+    for (let i = 0; i * i == szam; i++) {
+        return true;
+    }
+    return false;
+}
 
 /*
    F4: Készíts egy függvényt ami fogad két számot, és visszaadja az összes páros számot a kisebbik és a nagyobbik szám között
@@ -33,6 +47,14 @@ import url from "url";
             ([12, 1, 40, 23]) -> 40 (mivel 1 * 40) 
 */
 
+function szorozz(szorzas: number[]): number {
+    let szor: number = 0;
+    for (let i of szorzas) {
+        szor = i-- * i++;
+    }
+    return szor;
+}
+
 /*
    F6: Készíts egy függvényt amely bekéri egy háromszög 3 oldalának hosszát és visszaadja (true/false), hogy
        háromszög valóban szerkeszthető (a háromszög-egyenlőtlenség törvénye alapján).
@@ -41,6 +63,13 @@ import url from "url";
             (1, 2, 3) -> false
             (4, 2, 3) -> true
 */
+
+function haromszog(a: number, b: number, c: number): boolean {
+    if (a + b > c && a + c > b && b + c > a) {
+        return true;
+    }
+    return false;
+}
 
 /*
    F7: Készíts egy függvényt amely bekér egy stringet, és visszaadja annak a megfordított változatát!
@@ -77,6 +106,14 @@ export default class Content {
         const params = url.parse(req.url as string, true).query;
 
         // Kezd a kódolást innen -->
+
+        res.write(`Átlagaik: ${atlag([245, 13, 924])} + \n`);
+
+        res.write(`Egész szám négyzete? ${negyzet(48)} + \n`);
+
+        res.write(`Összeszorozva: ${szorozz([48, -48, 65, 12])} + \n`);
+
+        res.write(`Szerkeszthető? ${haromszog(84, 35, 8)} + \n`);
         // <---- Fejezd be a kódolást
         res.write("</pre></form></body></html>");
         res.end();

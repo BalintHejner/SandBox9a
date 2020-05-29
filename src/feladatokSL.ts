@@ -55,7 +55,17 @@ function teglalap(a: number, b: number, c: number, d: number): boolean {
 
 // F7.: Írjon függvényt, amely paraméterben kap egy sztringet, és egy karaktert, és visszaadja a sztringben lévő karakterek számát!
 // F8.: Írjon függvényt, amely paraméterben kap két számot és visszaadja a két szám mértani közepét!
+
+function kozep(z: number, w: number): number {
+    return Math.sqrt(z * w);
+}
+
 // F9.: Írjon függvényt, amely paraméterben kapja egy derékszögű háromszög két befogóját és visszaadja az átfogóját!
+
+function pitagorasz(alfa: number, beta: number): number {
+    return Math.sqrt(Math.pow(alfa, 2) + Math.pow(beta, 2));
+}
+
 // F10.: Írjon függvényt, amely egy paraméterben kapott számot eloszt 2-vel annyiszor, ahányszor lehet és közben kiírja a számot a kettes számok szorzataként megszorozva egy olyan számmal, amely már nem osztható 2-vel. Pl.: 120 = 2*2*2*15. A függvény ne adjon vissza semmit!
 
 export default class Content {
@@ -91,7 +101,11 @@ export default class Content {
 
         res.write(`Elemek: ${iras(["Egy", "Bodza", "Megszentségteleníthetetlenségeskedéseitekért", "Korona"])} + \n`);
 
-        res.write(`Téglalap: ${teglalap}`);
+        res.write(`Téglalap: ${teglalap} + \n`);
+
+        res.write(`A mértani közepük: ${kozep(15, 38)} + \n`);
+
+        res.write(`Az átfogó hossza: ${pitagorasz(48, 32)}`);
 
         // <---- Fejezd be a kódolást
 
